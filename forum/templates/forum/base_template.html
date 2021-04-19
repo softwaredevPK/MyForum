@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Debate on any topic you find interesting!">
+	<meta name="keywords" content="debate, forum, dispute">
+	<meta name="author" content="Piotr Kotarba">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />  <!-- improves use on IE -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'forum/main.css' %}">
+    <link rel="icon" href="{% static 'forum/Logo.png' %}" type="image/icon type">
+
+    {% if title %}
+        <title>{{ title }} - MyForum</title>
+    {% else %}
+        <title>MyForum</title>
+    {% endif %}
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark justify-content-center">
+            <media class="col-12">
+                <a href="#"><img class="img-fluid mx-auto d-block" src="{% static 'forum/Logo.png' %}" alt="MyForum logo"></a>
+            </media>
+            <nav class="navbar-expand ">
+                <ul class="navbar-nav mr-auto ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link " href="#">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</body>
+</html>
