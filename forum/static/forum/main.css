@@ -6,10 +6,21 @@ body
 .forum-title{
     background-color: #6c451c;
     border: 2px solid  #5a3817;
+    color: GhostWhite;
 }
 
 .forum_container{
     background-color: #bcb48c;
     border: 2px solid #6c542c;
+}
+
+a{
+   outline: none;
+   color:  #6c451c;
+   font-weight: bold;
+}
+
+a:hover {
+    color: #9c451c;
 }
 

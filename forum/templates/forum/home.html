@@ -1,0 +1,68 @@
+{% extends "forum/base_template.html" %}
+{% block content%}
+    {% for forum_group in forum_groups %}
+        {% if forum_group.forum_set.count > 0 %}
+        <section>
+            <header>
+                <div class="row forum-title">
+                    <h2 class="h5 col-8 border-right border-dark mb-0 pt-1">{{ forum_group.name }}</h2>
+                    <p class="col-2  border-right border-dark mb-0 pt-1" style="width:">Last post / author</p>
+                    <p class="col-1 border-right border-dark mb-0 pt-1">Topics</p>
+                    <p class="col-1 pt-1">Posts</p>
+                </div>
+            </header>
+            <section>
+                <div class="row forum_container">
+                    {% for forum in forum_group.forum_set.all %}
+                        {% if forum != forum_group.forum_set.last %}
+                            <div class="col-8 pt-2 border-right border-bottom border-dark">
+                                <i class="icon-doc pr-1" style="float: left;"></i>
+                                <div style="float: left;">
+                                    <h3 class="h6 mb-0" ><a href="#">{{ forum.title }}</a></h3>
+                                    <p class="p-0 mb-0">{{ forum.description }}</p>
+                                </div>
+                                <div style="float: none;"></div>
+                            </div>
+                            <div class="col-2 border-right border-bottom border-dark">
+                                <p class="p-0 m-0"><a>Last post</a></p>
+                                <small>Author</small>
+                            </div>
+                            <div class="col-1 p-2 border-right border-bottom border-dark">Number of topics
+                            </div>
+                            <div class="col-1 p-2 border-bottom border-dark">Number of posts
+                            </div>
+                        {% else %}
+                            <div class="col-8 pt-2 border-right border-dark">
+                                <i class="icon-doc pr-1" style="float: left;"></i>
+                                <div style="float: left;">
+                                    <h3 class="h6 mb-0" ><a href="#" class="">{{ forum.title }}</a></h3>
+                                    <p class="p-0 mb-0">{{ forum.description }}</p>
+                                </div>
+                                <div style="float: none;"></div>
+                            </div>
+                            <div class="col-2 border-right border-dark">
+                                <p class="p-0 m-0"><a>Last post</a></p>
+                                <small>Author</small>
+                            </div>
+                            <div class="col-1 p-2 border-right border-dark">Number of topics
+                            </div>
+                            <div class="col-1 p-2">Number of posts
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </section>
+        {% endif %}
+    {% endfor %}
+{% endblock content%}
+
+
+
+
+
+
+
+
+
+
