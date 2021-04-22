@@ -22,6 +22,7 @@ class Forum(models.Model):
 class Topic(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
+    views = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # RODO
     forum = models.ForeignKey(Forum, on_delete=models.PROTECT)
 
@@ -33,8 +34,7 @@ class Post(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # RODO
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)  # RODO
-    views = models.IntegerField(default=0)
     date_posted = models.DateTimeField(default=timezone.now, auto_now_add=False)
 
     def __str__(self):
-        return self.author.name + f' - {self.topic} - {self.date_posted.strftime("%a %H:%M  %d/%m/%y")}'
+        return self.author.username + f' - {self.topic} - {self.date_posted.strftime("%a %H:%M  %d/%m/%y")}'

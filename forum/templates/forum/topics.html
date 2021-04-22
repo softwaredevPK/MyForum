@@ -9,11 +9,10 @@
                 <p class="col-1 pt-1">Views</p>
             </div>
         </header>
-    <section>
+    </section>
     {% for topic in forum.topic_set.all %}
         <section>
             <div class="row forum_container">
-
                 {% if topic != forum.topic_set.last %}
                     <div class="col-8 pt-2 border-right border-bottom border-dark">
                         <i class="icon-doc pr-1" style="float: left;"></i>
@@ -33,6 +32,7 @@
                     </div>
                 {% else %}
                     <div class="col-8 pt-2 border-right border-dark">
+
                         <i class="icon-doc pr-1" style="float: left;"></i>
                         <div style="float: left;">
                             <h3 class="h6 mb-0" ><a href="#" class="">{{ forum.title }}</a></h3>
@@ -52,14 +52,11 @@
             </div>
         </section>
     {% endfor %}
+        <footer>
+            <div class="row forum_container justify-content-center font-weight-bold">
+                <i class="icon-mail">No today's new posts</i>
+                <i class="icon-envelope-open-o pl-3">Today's new posts</i>
+            </div>
+        </footer>
+
 {% endblock content%}
-
-
-
-
-
-
-
-
-
-

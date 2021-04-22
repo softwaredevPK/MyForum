@@ -1,2 +1,6 @@
 
+.icon-mail:before { content: '\e800'; } /* '' */
 .icon-doc:before { content: '\e805'; } /* '' */
+.icon-mail-alt:before { content: '\f0e0'; } /* '' */
+.icon-envelope-open:before { content: '\f2b6'; } /* '' */
+.icon-envelope-open-o:before { content: '\f2b7'; } /* '' */

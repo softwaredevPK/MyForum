@@ -10,3 +10,11 @@ Simple forum built with Django, which allows to create topics under thematic gro
    Author:    Designmodo for Smashing Magazine
    License:   CC BY ()
    Homepage:  http://designmodo.com/linecons-free/
+
+## Font Awesome
+
+   Copyright (C) 2016 by Dave Gandy
+
+   Author:    Dave Gandy
+   License:   SIL ()
+   Homepage:  http://fortawesome.github.com/Font-Awesome/

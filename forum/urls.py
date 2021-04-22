@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import ForumListView, ForumTopicListView
+from .views import ForumListView, ForumTopicListView, TopicPostListView
 
 urlpatterns = [
     path('', ForumListView.as_view(), name='main-page'),
-    path('forum/<int:pk>/', ForumTopicListView.as_view(), name='topics-page')  # todo finish template(different fontello font should be used)
+    path('forum/<int:pk>/', ForumTopicListView.as_view(), name='topics-page'),  # todo finish template(different fontello font should be used)
+    path('forum/<int:forum_pk>/<int:topic_pk>', TopicPostListView.as_view(), name='posts-page')
 ]
