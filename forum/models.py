@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 class ForumGroup(models.Model):
@@ -31,7 +32,7 @@ class Topic(models.Model):
 
 
 class Post(models.Model):
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # RODO
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)  # RODO
     date_posted = models.DateTimeField(default=timezone.now, auto_now_add=False)
