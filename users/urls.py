@@ -18,8 +18,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from users import views as user_views
+from .forms import LoginForm
 
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html', authentication_form=LoginForm), name='login'),
     path('profile/', user_views.profile, name='profile')
 ]
