@@ -28,3 +28,7 @@ a:hover {
     color:white;
     background-color: #6c451c;
 }
+
+.text-muted{
+    color: #404142!important;
+}
