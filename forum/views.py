@@ -25,22 +25,24 @@ class ForumTopicListView(ListView):
 
 
 def topic_posts(request, forum_pk, topic_pk):
-    def get_posts():
-        topic = get_object_or_404(Topic, pk=topic_pk, forum_id=forum_pk)
+    def get_posts(topic):
         my_objects = topic.post_set.all()
-        if not my_objects:
-            raise Http404("No MyModel matches the given query.")
         return my_objects
 
-    query_set = get_posts()
+    topic = get_object_or_404(Topic, pk=topic_pk, forum_id=forum_pk)
+    query_set = get_posts(topic)
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            form.instance.author = request.user
+            topic = get_object_or_404(Topic, pk=request.resolver_match.kwargs['topic_pk'])
+            form.instance.topic = topic
             post_item = form.save(commit=False)
-            post_item.save()
-            return redirect('/')
+            if post_item.content.strip() != '':
+                post_item.save()
+                return redirect(request.path_info)
     else:
         form = PostForm
 
-    return render(request, 'forum/posts.html', {'form': form, 'posts': query_set})
+    return render(request, 'forum/posts.html', {'form': form, 'posts': query_set, 'topic': topic})
 # todo missing token in html + check if user.authenticated

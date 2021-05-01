@@ -1,49 +1,49 @@
 {% extends "forum/base_template.html" %}
 {% block content%}
+    <article>
+        <div class="row forum-title pl-1"><small>{{ topic.date_posted|date:"d F Y, H:i:s" }}</small></div>
+        <div class="row forum_container" style="min-height: 180px;">
+            <aside class="col-4 border-right border-dark pl-1 pt-1">
+                <img class="rounded-circle img-fluid col-5" src="{{ topic.author.profile.image.url }}">
+                {{ topic.author.username }}
+            </aside>
+            <div class="col-8">
+                <header class="border-bottom border-secondary font-weight-bold pl-1 pt-1">{{ topic.title }}</header>
+                <div class="pl-1">{{ topic.content | safe}}</div>
+            </div>
+        </div>
+    </article>
     {% for post in posts%}
-        {% if post == posts|first %}
-            <article>
-            <div class="row forum-title pl-1"><small>{{ post.date_posted|date:"F d, Y" }}</small></div>
-                <div class="row forum_container" style="min-height: 180px;">
-                    <aside class="col-4 border-right border-dark pl-1 pt-1">
-                            Image
-                            {{ post.author }}
-                    </aside>
-                    <div class="col-8">
-                        <header class="border-bottom border-secondary font-weight-bold pl-1 pt-1">{{ post.topic }}</header>
-                        <div class="pl-1">{{ post.content }}</div>
-                    </div>
+        <section class="mt-2">
+            <div class="row forum-title pl-1"><small>{{ post.date_posted|date:"d F Y, H:i:s" }}</small></div>
+            <div class="row forum_container" style="min-height: 180px;">
+                <aside class="col-4 border-right border-dark pl-1 pt-1">
+                     <img class="rounded-circle img-fluid col-5" src="{{ post.author.profile.image.url }}">
+                    {{ post.author }}
+                </aside>
+                <div class="col-8">
+                    <div class="pl-1">{{ post.content | safe }}</div>
                 </div>
-            </article>
-        {% else %}
-            <section class="mt-2">
-                <div class="row forum-title pl-1"><small>{{ post.date_posted|date:"F d, Y" }}</small></div>
-                <div class="row forum_container" style="min-height: 180px;">
-                    <aside class="col-4 border-right border-dark pl-1 pt-1">
-                            Image
-                            {{ post.author }}
-                    </aside>
-                    <div class="col-8">
-                        <header class="border-bottom border-secondary font-weight-bold pl-1 pt-1">{{ post.topic }}</header>
-                        <div class="pl-1">{{ post.content }}</div>
-                    </div>
-                </div>
-            </section>
-        {% endif %}
+            </div>
+        </section>
     {% endfor %}
-        <div class="form-group">
-            <form method="POST">
-                <div class="row">
-                    <button class="btn mt-2 btn-outline-secondary brown_btn">Respond</button>
-                </div>
-                <div class="row mt-3">
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <button class="btn mt-2 btn-outline-secondary brown_btn" onclick="location.href='{% url 'main-page' %}'" type="button">Respond</button>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 forum-title pl-1"><small>Fast respond</small></div>
+                <div class="forum_container col-12 pb-1">
+                    <div class="text-center">
                     {{ form.media }}
                     {{ form.as_p }}
-                <input type="submit">
-                    <div class="col-12 forum-title pl-1"><small>TinyMc</small></div>
-                    <div class="forum_container col-12">tteet</div>
+                    </div>
+                    <button class="btn mt-2 btn-outline-secondary brown_btn" type="submit">Fast respond</button>
                 </div>
-                </form>
-        </div>
+            </div>
+        </form>
+    </div>
 
 {% endblock content%}

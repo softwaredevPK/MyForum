@@ -24,6 +24,7 @@ class Topic(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     views = models.IntegerField(default=0)
+    date_posted = models.DateTimeField(default=timezone.now, auto_now_add=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # RODO
     forum = models.ForeignKey(Forum, on_delete=models.PROTECT)
 

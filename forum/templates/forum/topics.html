@@ -17,8 +17,8 @@
                     <div class="col-8 pt-2 border-right border-bottom border-dark">
                         <i class="icon-doc pr-1" style="float: left;"></i>
                         <div style="float: left;">
-                            <h3 class="h6 mb-0" ><a href="#">{{ forum.title }}</a></h3>
-                            <p class="p-0 mb-0">{{ forum.description }}</p>
+                            <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=topic.pk %}">{{ topic.title }}</a></h3>
+                            <p class="p-0 mb-0">{{ topic.description }}</p>
                         </div>
                         <div style="float: none;"></div>
                     </div>
@@ -35,8 +35,8 @@
 
                         <i class="icon-doc pr-1" style="float: left;"></i>
                         <div style="float: left;">
-                            <h3 class="h6 mb-0" ><a href="#" class="">{{ forum.title }}</a></h3>
-                            <p class="p-0 mb-0">{{ forum.description }}</p>
+                            <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=topic.pk %}" class="">{{ topic.title }}</a></h3>
+                            <p class="p-0 mb-0">{{ topic.description }}</p>
                         </div>
                         <div style="float: none;"></div>
                     </div>
