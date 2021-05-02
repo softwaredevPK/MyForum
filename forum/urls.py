@@ -14,12 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import ForumListView, ForumTopicListView,  topic_posts
+from .views import ForumListView, ForumTopicListView,  posts
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('', ForumListView.as_view(), name='main-page'),
     path('forum/<int:pk>/', ForumTopicListView.as_view(), name='topics-page'),  # todo finish template(different fontello font should be used)
-    path('forum/<int:forum_pk>/<int:topic_pk>', topic_posts, name='posts-page')]\
+    path('forum/<int:forum_pk>/<int:topic_pk>', posts, name='posts-page')]\
               # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

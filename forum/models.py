@@ -19,6 +19,12 @@ class Forum(models.Model):
     def __str__(self):
         return self.title
 
+    def posts_no(self):
+        return self.topic_set.aggregate(models.Count('post'))['post__count'] + self.topic_set.count()
+
+    def last_topic(self):
+        return self.topic_set.latest('date_posted')
+
 
 class Topic(models.Model):
     title = models.CharField(max_length=50)
@@ -30,6 +36,9 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.title
+
+    def post_no(self):
+        return self.post_set.count() + 1
 
 
 class Post(models.Model):

@@ -32,3 +32,17 @@ a:hover {
 .text-muted{
     color: #404142!important;
 }
+
+.font-14{
+    font-size: 14px;
+}
+
+.font-11{
+    font-size: 14px;
+}
+
+.flexbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

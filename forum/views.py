@@ -24,7 +24,7 @@ class ForumTopicListView(ListView):
         return forum
 
 
-def topic_posts(request, forum_pk, topic_pk):
+def posts(request, forum_pk, topic_pk):
     def get_posts(topic):
         my_objects = topic.post_set.all()
         return my_objects

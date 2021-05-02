@@ -5,17 +5,17 @@
         <section>
             <header>
                 <div class="row forum-title">
-                    <h2 class="h5 col-8 border-right border-dark mb-0 pt-1">{{ forum_group.name }}</h2>
-                    <p class="col-2  border-right border-dark mb-0 pt-1" style="width:">Last post / author</p>
-                    <p class="col-1 border-right border-dark mb-0 pt-1">Topics</p>
-                    <p class="col-1 pt-1">Posts</p>
+                    <h2 class="col-6 h5 col-lg-8 pt-1 mb-0 border-right border-dark  ">{{ forum_group.name }}</h2>
+                    <p class="col-2 border-right border-dark mb-0 pt-1 text-center font-14" style="width:">Last post / author</p>
+                    <p class="col-2 col-lg-1 border-right border-dark mb-0 pt-1 text-center font-14">Topics</p>
+                    <p class="col-2 col-lg-1 pt-1 text-center font-14">Posts</p>
                 </div>
             </header>
             <section>
                 <div class="row forum_container">
                     {% for forum in forum_group.forum_set.all %}
                         {% if forum != forum_group.forum_set.last %}
-                            <div class="col-8 pt-2 border-right border-bottom border-dark">
+                            <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-bottom border-dark">
                                 <i class="icon-doc pr-1" style="float: left;"></i>
                                 <div style="float: left;">
                                     <h3 class="h6 mb-0" ><a href="{% url 'topics-page' pk=forum.pk %}">{{ forum.title }}</a></h3>
@@ -23,16 +23,20 @@
                                 </div>
                                 <div style="float: none;"></div>
                             </div>
-                            <div class="col-2 border-right border-bottom border-dark">
-                                <p class="p-0 m-0"><a>Last post</a></p>
-                                <small>Author</small>
+                            <div class="col-2 border-right border-bottom border-dark font-14">
+                                 {% if forum.last_topic.id != '' %}
+                                    <p class="p-0 m-0"><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=forum.last_topic.id %}">{{ forum.last_topic.title }}</a></p>
+                                    <small>{{ forum.last_topic.author.username }}</small>
+                                {% endif %}
                             </div>
-                            <div class="col-1 p-2 border-right border-bottom border-dark">Number of topics
+                            <div class="col-2 col-lg-1 p-2 border-right border-bottom border-dark text-center font-14 flexbox">
+                                {{ forum.topic_set.count }}
                             </div>
-                            <div class="col-1 p-2 border-bottom border-dark">Number of posts
+                            <div class="col-2 col-lg-1 p-2 border-bottom border-dark text-center font-14 flexbox">
+                                {{ forum.posts_no }}
                             </div>
                         {% else %}
-                            <div class="col-8 pt-2 border-right border-dark">
+                            <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-dark">
                                 <i class="icon-doc pr-1" style="float: left;"></i>
                                 <div style="float: left;">
                                     <h3 class="h6 mb-0" ><a href="{% url 'topics-page' pk=forum.pk %}" class="">{{ forum.title }}</a></h3>
@@ -40,13 +44,17 @@
                                 </div>
                                 <div style="float: none;"></div>
                             </div>
-                            <div class="col-2 border-right border-dark">
-                                <p class="p-0 m-0"><a>Last post</a></p>
-                                <small>Author</small>
+                            <div class="col-2 border-right border-dark font-14">
+                                {% if forum.last_topic.id != '' %}
+                                    <p class="p-0 m-0"><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=forum.last_topic.id %}">{{ forum.last_topic.title }}</a></p>
+                                    <small>{{ forum.last_topic.author.username }}</small>
+                                {% endif %}
                             </div>
-                            <div class="col-1 p-2 border-right border-dark">Number of topics
+                            <div class="col-2 col-lg-1 p-2 border-right border-dark text-center font-14 flexbox">
+                                {{ forum.topic_set.count }}
                             </div>
-                            <div class="col-1 p-2">Number of posts
+                            <div class="col-2 col-lg-1 p-2 text-center font-14 flexbox">
+                                {{ forum.posts_no }}
                             </div>
                         {% endif %}
                     {% endfor %}
