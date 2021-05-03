@@ -13,18 +13,18 @@ class ForumListView(ListView):
     context_object_name = 'forum_groups'
 
 
-# todo template for below view need an upgrade
 class ForumTopicListView(ListView):
     model = Topic
     template_name = 'forum/topics.html'
-    context_object_name = 'forum'
+    context_object_name = 'topics'
 
     def get_queryset(self):
-        forum = get_object_or_404(Forum, pk=self.kwargs['pk'])
-        return forum
+        topics = Topic.objects.filter(forum_id=self.kwargs['forum_id']).order_by('date_posted')
+        return topics
 
 
 def posts(request, forum_pk, topic_pk):
+    """Generates posts.html, which contains all posts related to certain topic in certain forum"""
     def get_posts(topic):
         my_objects = topic.post_set.all()
         return my_objects
@@ -43,6 +43,9 @@ def posts(request, forum_pk, topic_pk):
                 return redirect(request.path_info)
     else:
         form = PostForm
+        # each request for posts means viewing by someone
+        topic.views += 1
+        topic.save()
 
     return render(request, 'forum/posts.html', {'form': form, 'posts': query_set, 'topic': topic})
 # todo missing token in html + check if user.authenticated

@@ -32,10 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_cleanup',
+    'django_cleanup',  # supports deleting replaced photos
     'ckeditor',
     'users.apps.UsersConfig',
-    'crispy_forms',
+    'crispy_forms',  # style django forms
     'forum.apps.ForumConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -132,8 +132,9 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'main-page'
 LOGIN_URL = 'login'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # settings for crispy
 
+# settings to send emails for "forgot password" feature
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

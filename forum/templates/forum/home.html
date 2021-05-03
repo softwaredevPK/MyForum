@@ -5,8 +5,8 @@
         <section>
             <header>
                 <div class="row forum-title">
-                    <h2 class="col-6 h5 col-lg-8 pt-1 mb-0 border-right border-dark  ">{{ forum_group.name }}</h2>
-                    <p class="col-2 border-right border-dark mb-0 pt-1 text-center font-14" style="width:">Last post / author</p>
+                    <h2 class="col-6 h5 col-lg-8 pt-1 mb-0 border-right border-dark">{{ forum_group.name }}</h2>
+                    <p class="col-2 border-right border-dark mb-0 pt-1 text-center font-14">Last post / author</p>
                     <p class="col-2 col-lg-1 border-right border-dark mb-0 pt-1 text-center font-14">Topics</p>
                     <p class="col-2 col-lg-1 pt-1 text-center font-14">Posts</p>
                 </div>
@@ -18,7 +18,7 @@
                             <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-bottom border-dark">
                                 <i class="icon-doc pr-1" style="float: left;"></i>
                                 <div style="float: left;">
-                                    <h3 class="h6 mb-0" ><a href="{% url 'topics-page' pk=forum.pk %}">{{ forum.title }}</a></h3>
+                                    <h3 class="h6 mb-0" ><a href="{% url 'topics-page' forum_id=forum.pk %}">{{ forum.title }}</a></h3>
                                     <p class="p-0 mb-0">{{ forum.description }}</p>
                                 </div>
                                 <div style="float: none;"></div>
@@ -39,7 +39,7 @@
                             <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-dark">
                                 <i class="icon-doc pr-1" style="float: left;"></i>
                                 <div style="float: left;">
-                                    <h3 class="h6 mb-0" ><a href="{% url 'topics-page' pk=forum.pk %}" class="">{{ forum.title }}</a></h3>
+                                    <h3 class="h6 mb-0" ><a href="{% url 'topics-page' forum_id=forum.pk %}" class="">{{ forum.title }}</a></h3>
                                     <p class="p-0 mb-0">{{ forum.description }}</p>
                                 </div>
                                 <div style="float: none;"></div>

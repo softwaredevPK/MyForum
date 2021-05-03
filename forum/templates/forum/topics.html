@@ -3,63 +3,60 @@
     <section>
         <header>
             <div class="row forum-title">
-                <h2 class="h5 col-6 col-lg-8 border-right border-dark mb-0 pt-1 ">{{ forum.title }}</h2>
-                <p class="col-2 border-right border-dark mb-0 pt-1 text-center font-14" style="width:">Last post / author</p>
+                <h2 class="col-6 h5 col-lg-8 pt-1 mb-0 border-right border-dark">{{ topics.first.forum.title }}</h2>
+                <p class="col-2 border-right border-dark mb-0 pt-1 text-center font-14">Last post / author</p>
                 <p class="col-2 col-lg-1 border-right border-dark mb-0 pt-1 text-center font-14">Responses</p>
                 <p class="col-2 col-lg-1 pt-1 text-center font-14">Views</p>
             </div>
         </header>
     </section>
-    {% for topic in forum.topic_set.all %}
-        <section>
-                {% if topic != forum.topic_set.last %}
-             <div class="row forum_container border-bottom-0">
-                    <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-bottom border-dark">
-                        <i class="icon-doc pr-1" style="float: left;"></i>
-                        <div style="float: left;">
-                            <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=topic.pk %}">{{ topic.title }}</a></h3>
-                            <p class="p-0 mb-0">{{ topic.description }}</p>
-                        </div>
-                        <div style="float: none;"></div>
-                    </div>
-                    <div class="col-2 border-right border-bottom border-dark font-14">
-                        <p class="p-0 m-0"><a>Last post</a></p>
-                        <small>Author</small>
-                    </div>
-                    <div class="col-2 col-lg-1 p-2 border-right border-bottom border-dark text-center font-14">Number of posts
-                    </div>
-                    <div class="col-2 col-lg-1 p-2 border-bottom border-dark text-center font-14">Number of views
-                    </div>
-                  </div>
+    <div class="row forum_container border-top-0">
+    {% for topic in topics %}
+        {% if topic != topics.last %}
+            <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-bottom border-dark">
+                {% if topic.new_post_today %}
+                    <i class="icon-envelope-open-o pr-1" style="float: left;"></i>
                 {% else %}
-             <div class="row forum_container border-bottom-0 border-top-0">
-                    <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-dark">
-
-                        <i class="icon-doc pr-1" style="float: left;"></i>
-                        <div style="float: left;">
-                            <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=forum.pk topic_pk=topic.pk %}" class="">{{ topic.title }}</a></h3>
-                            <p class="p-0 mb-0">{{ topic.description }}</p>
-                        </div>
-                        <div style="float: none;"></div>
-                    </div>
-                    <div class="col-2 border-right border-dark font-14">
-                        <p class="p-0 m-0"><a>Last post</a></p>
-                        <small>Author</small>
-                    </div>
-                    <div class="col-2 col-lg-1 p-2 border-right border-dark text-center font-14">Number of topics
-                    </div>
-                    <div class="col-2 col-lg-1 p-2 text-center font-14">Number of posts
-                    </div>
-             </div>
+                    <i class="icon-mail pr-1" style="float: left;"></i>
                 {% endif %}
-
-        </section>
-    {% endfor %}
-        <footer>
-            <div class="row forum_container justify-content-center font-weight-bold">
-                <i class="icon-mail">No today's new posts</i>
-                <i class="icon-envelope-open-o pl-3">Today's new posts</i>
+                <div style="float: left;">
+                    <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=topic.forum_id topic_pk=topic.pk %}">{{ topic.title }}</a></h3>
+                    <p class="p-0 mb-0">{{ topic.description }}</p>
+                </div>
+                <div style="float: none;"></div>
             </div>
-        </footer>
-
+            <div class="col-2 border-right border-bottom border-dark font-14">
+                <p class="p-0 m-0"><a>{{ topic.last_post.author }}</a></p>
+                <small>{{ topic.last_post.date_posted|date:"d-m-Y H:i" }}</small>
+            </div>
+            <div class="col-2 col-lg-1 p-2 border-right border-bottom border-dark text-center font-14 flexbox">{{ topic.responses }}</div>
+            <div class="col-2 col-lg-1 p-2 border-bottom border-dark text-center font-14 flexbox">{{ topic.views }}</div>
+        {% else %}
+            <div class="col-6 col-lg-8 pt-2 pb-2 border-right border-dark">
+                 {% if topic.new_post_today %}
+                    <i class="icon-envelope-open-o pr-1" style="float: left;"></i>
+                {% else %}
+                    <i class="icon-mail pr-1" style="float: left;"></i>
+                {% endif %}
+                <div style="float: left;">
+                    <h3 class="h6 mb-0" ><a href="{% url 'posts-page' forum_pk=topic.forum_id topic_pk=topic.pk %}" class="">{{ topic.title }}</a></h3>
+                    <p class="p-0 mb-0">{{ topic.description }}</p>
+                </div>
+                <div style="float: none;"></div>
+            </div>
+            <div class="col-2 border-right border-dark font-14">
+                        <p class="p-0 m-0"><a>{{ topic.last_post.author }}</a></p>
+                        <small>{{ topic.last_post.date_posted|date:"d-m-Y H:i" }}</small>
+            </div>
+            <div class="col-2 col-lg-1 p-2 border-right border-dark text-center font-14 flexbox">{{ topic.responses }} </div>
+            <div class="col-2 col-lg-1 p-2 text-center font-14 flexbox">{{ topic.views }}</div>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <footer>
+        <div class="row forum_container justify-content-center font-weight-bold">
+            <i class="icon-mail">No today's new posts</i>
+            <i class="icon-envelope-open-o pl-3">Today's new posts</i>
+        </div>
+    </footer>
 {% endblock content%}

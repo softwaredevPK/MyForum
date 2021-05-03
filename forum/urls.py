@@ -20,6 +20,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('', ForumListView.as_view(), name='main-page'),
-    path('forum/<int:pk>/', ForumTopicListView.as_view(), name='topics-page'),  # todo finish template(different fontello font should be used)
+    path('forum/<int:forum_id>/', ForumTopicListView.as_view(), name='topics-page'),
     path('forum/<int:forum_pk>/<int:topic_pk>', posts, name='posts-page')]\
               # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
