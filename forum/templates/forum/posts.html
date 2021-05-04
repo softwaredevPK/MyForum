@@ -31,19 +31,44 @@
         <form method="POST">
             {% csrf_token %}
             <div class="row">
+                <div class="col-4">
                 <button class="btn mt-2 btn-outline-secondary brown_btn" onclick="location.href='{% url 'main-page' %}'" type="button">Respond</button>
+                </div>
+                <!-- Pagination            -->
+                <div class="col-4 pr-0 pt-1 offset-4">
+                    {{ posts.number }}
+                        <ul class="pagination justify-content-end">
+                            {% if posts.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1"><<</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}"><</a></li>
+                            {% endif %}
+
+                            {% for i in posts.paginator.page_range %}
+                                {% if  curr_page|add:"-2" <= i and curr_page|add:"2" >= i  %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if posts.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">></a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">>></a></li>
+                            {% endif %}
+                            </ul>
+                </div>
             </div>
+            <!-- Fast Respond - onlt for authenticated users -->
+            {% if user.is_authenticated %}
             <div class="row mt-3">
                 <div class="col-12 forum-title pl-1"><small>Fast respond</small></div>
                 <div class="forum_container col-12 pb-1">
                     <div class="text-center">
-                    {{ form.media }}
-                    {{ form.as_p }}
+                        {{ form.media }}
+                        {{ form.as_p }}
                     </div>
                     <button class="btn mt-2 btn-outline-secondary brown_btn" type="submit">Fast respond</button>
                 </div>
             </div>
+            {% endif %}
         </form>
     </div>
-
 {% endblock content%}
